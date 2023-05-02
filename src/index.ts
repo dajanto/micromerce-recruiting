@@ -27,7 +27,7 @@ const extractDates = (customer: any): Dates[] | [] => {
     if(customer.ListOfPeriods.includes("|")) {
         return strichdivide(customer.ListOfPeriods);
     } else if(customer.ListOfPeriods.includes("-")) {
-       return dashdivide(customer.ListOfPeriods);
+       return [dashdivide(customer.ListOfPeriods)];
     } else {
        //return ""
     }
