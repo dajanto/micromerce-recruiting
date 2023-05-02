@@ -5,7 +5,7 @@ type Dates = {
 
 function checkDate(array) {
     for (let i = 0; i < array.length; i++) {
-        if(array[i].startDate.length != 10 || array[i].endDate.length != 10) {
+        if (array[i].startDate.length != 10 || array[i].endDate.length != 10) {
             return "string length is invalid";
         }
     }
@@ -16,7 +16,7 @@ function dashdivide(dashstring): any {
     let delimiterdash = dashstring.trim().split("-");
     let startDate = delimiterdash[0].trim();
     let endDate = delimiterdash[1].trim();
-    return {startDate, endDate};
+    return { startDate, endDate };
 }
 
 function strichdivide(strichstring) {
@@ -27,10 +27,7 @@ function strichdivide(strichstring) {
 }
 
 const extractDates = (customer: any): any => {
-    if (
-        customer.ListOfPeriods == null ||
-        !('ListOfPeriods' in customer)
-    ) {
+    if (customer.ListOfPeriods == null || !("ListOfPeriods" in customer)) {
         return [];
     }
 
@@ -38,15 +35,12 @@ const extractDates = (customer: any): any => {
     if (customer.ListOfPeriods.includes("|")) {
         strich = strichdivide(customer.ListOfPeriods);
         return checkDate(strich);
-        }
-    else
-        if (customer.ListOfPeriods.includes("-")) {
-            dash = [dashdivide(customer.ListOfPeriods)];
-            return checkDate(dash);
+    } else if (customer.ListOfPeriods.includes("-")) {
+        dash = [dashdivide(customer.ListOfPeriods)];
+        return checkDate(dash);
+    } else {
+        return [];
     }
-        else {
-           return [] ;
-        }
-    }
+};
 
-    export default extractDates;
+export default extractDates;
