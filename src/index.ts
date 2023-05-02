@@ -8,7 +8,21 @@ function checkDate(string) {
     return isNaN(timestamp);
 }
 
-function dashdivide(dashstring): Dates | String {
+function validateObject(obj) {
+    const startDate = obj.start;
+    const endDate = obj.end;
+    if (!startDate || !endDate) {
+        return "string length is invalid";
+    }
+    const dates = [startDate, endDate].filter(value => !isNaN(Date.parse(value)));
+    if (dates.length !== 2) {
+        return "string length is invalid";
+    } else {
+        return obj;
+    }
+}
+
+function dashdivide(dashstring): any {
     let delimiterdash = dashstring.trim().split("-");
     let startDate = delimiterdash[0].trim();
     let endDate = delimiterdash[1].trim();
@@ -21,7 +35,8 @@ function strichdivide(strichstring) {
         .split("|")
         .map((date) => dashdivide(date));
 }
-const extractDates = (customer: any): Dates[] | String | [] => {
+
+const extractDates = (customer: any): any => {
     if (
         customer.ListOfPeriods == null ||
         !Object.hasOwn(customer, "ListOfPeriods")
@@ -29,13 +44,16 @@ const extractDates = (customer: any): Dates[] | String | [] => {
         return [];
     }
 
-    if(customer.ListOfPeriods.includes("|")) {
-        return strichdivide(customer.ListOfPeriods);
-    } else if(customer.ListOfPeriods.includes("-")) {
-       return [dashdivide(customer.ListOfPeriods)];
-    } else {
-       //return "string length is invalid";
-    }
-};
 
-export default extractDates;
+    if (customer.ListOfPeriods.includes("|")) {
+        let strich = strichdivide(customer.ListOfPeriods);
+        return strich;
+        }
+    else
+        if (customer.ListOfPeriods.includes("-")) {
+            let dash = [dashdivide(customer.ListOfPeriods)];
+            return dash;
+    }
+    }
+
+    export default extractDates;
