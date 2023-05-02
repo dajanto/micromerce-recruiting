@@ -3,24 +3,15 @@ type Dates = {
     endDate: string;
 };
 
-function checkDate(string) {
-    const timestamp = Date.parse(string);
-    return isNaN(timestamp);
+function checkDate(array) {
+    for (let i = 0; i < array.length; i++) {
+        if(array[i].startDate.length != 10 || array[i].endDate.length != 10) {
+            return "string length is invalid";
+        }
+    }
+    return array;
 }
 
-function validateObject(obj) {
-    const startDate = obj.start;
-    const endDate = obj.end;
-    if (!startDate || !endDate) {
-        return "string length is invalid";
-    }
-    const dates = [startDate, endDate].filter(value => !isNaN(Date.parse(value)));
-    if (dates.length !== 2) {
-        return "string length is invalid";
-    } else {
-        return obj;
-    }
-}
 
 function dashdivide(dashstring): any {
     let delimiterdash = dashstring.trim().split("-");
@@ -39,20 +30,20 @@ function strichdivide(strichstring) {
 const extractDates = (customer: any): any => {
     if (
         customer.ListOfPeriods == null ||
-        !Object.hasOwn(customer, "ListOfPeriods")
+        !('ListOfPeriods' in customer)
     ) {
         return [];
     }
 
-
+    let dash, strich;
     if (customer.ListOfPeriods.includes("|")) {
-        let strich = strichdivide(customer.ListOfPeriods);
-        return strich;
+        strich = strichdivide(customer.ListOfPeriods);
+        return checkDate(strich);
         }
     else
         if (customer.ListOfPeriods.includes("-")) {
-            let dash = [dashdivide(customer.ListOfPeriods)];
-            return dash;
+            dash = [dashdivide(customer.ListOfPeriods)];
+            return checkDate(dash);
     }
     }
 

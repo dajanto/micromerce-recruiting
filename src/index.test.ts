@@ -27,7 +27,7 @@ describe("extractDates", () => {
   test("should return empty list (full customer1)", () => {
     // when
     const result = extractDates(example4Customer);
-    // then
+    // the
     expect(result).toStrictEqual([]);
   });
   test("should return empty list (full customer2)", () => {
