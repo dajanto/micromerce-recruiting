@@ -5,7 +5,7 @@ type Dates = {
 
 function checkDate(array) {
     for (let i = 0; i < array.length; i++) {
-        if (array[i].startDate.length != 10 || array[i].endDate.length != 10) {
+        if (array[i].startDate.length !== 10 || array[i].endDate.length !== 10) {
             return "string length is invalid";
         }
     }
