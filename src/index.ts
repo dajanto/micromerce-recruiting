@@ -4,18 +4,17 @@ type Dates = {
 };
 
 const extractDates = (customer: any): Dates | [] => {
-  //const periodString = customer.ListOfPeriods.trim();
-  let periodString = null;
-  if (periodString == null) {
+
+  if (customer.ListOfPeriods == null || Object.hasOwn(customer, 'ListOfPeriods')) {
     return [];
   }
 
-  const startDate = '11.11.2008';
-  const endDate = '17.12.2008';
+  const startDate = "11.11.2008";
+  const endDate = "17.12.2008";
 
   return {
     startDate,
-    endDate,
+    endDate
   };
 };
 
