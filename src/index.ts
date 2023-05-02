@@ -3,11 +3,11 @@ type Dates = {
   endDate: string;
 };
 
-function dashdivide(dashstring): Dates[] {
+function dashdivide(dashstring): Dates {
   let delimiterdash = dashstring.trim().split("-");
-  let startDate = delimiterdash[0];
-  let endDate = delimiterdash[1];
-  return [startDate, endDate];
+  let startDate = delimiterdash[0].trim();
+  let endDate = delimiterdash[1].trim();
+  return {startDate,endDate};
 }
 
 function strichdivide(strichstring): Dates[] {
