@@ -27,9 +27,7 @@ function strichdivide(strichstring) {
 }
 
 const extractDates = (customer: any): any => {
-
     let dash, strich;
-
     if (customer.ListOfPeriods == null || !("ListOfPeriods" in customer)) {
         return [];
     }
@@ -43,8 +41,6 @@ const extractDates = (customer: any): any => {
         dash = [dashdivide(customer.ListOfPeriods)];
         return checkDate(dash);
     }
-
-    return [];
 };
 
 export default extractDates;
