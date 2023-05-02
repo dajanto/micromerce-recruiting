@@ -12,7 +12,6 @@ function checkDate(array) {
     return array;
 }
 
-
 function dashdivide(dashstring): any {
     let delimiterdash = dashstring.trim().split("-");
     let startDate = delimiterdash[0].trim();
@@ -45,6 +44,9 @@ const extractDates = (customer: any): any => {
             dash = [dashdivide(customer.ListOfPeriods)];
             return checkDate(dash);
     }
+        else {
+           return [] ;
+        }
     }
 
     export default extractDates;
