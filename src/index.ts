@@ -3,7 +3,12 @@ type Dates = {
     endDate: string;
 };
 
-function dashdivide(dashstring): Dates {
+function checkDate(string) {
+    const timestamp = Date.parse(string);
+    return isNaN(timestamp);
+}
+
+function dashdivide(dashstring): Dates | String {
     let delimiterdash = dashstring.trim().split("-");
     let startDate = delimiterdash[0].trim();
     let endDate = delimiterdash[1].trim();
@@ -16,7 +21,7 @@ function strichdivide(strichstring) {
         .split("|")
         .map((date) => dashdivide(date));
 }
-const extractDates = (customer: any): Dates[] | [] => {
+const extractDates = (customer: any): Dates[] | String | [] => {
     if (
         customer.ListOfPeriods == null ||
         !Object.hasOwn(customer, "ListOfPeriods")
@@ -29,7 +34,7 @@ const extractDates = (customer: any): Dates[] | [] => {
     } else if(customer.ListOfPeriods.includes("-")) {
        return [dashdivide(customer.ListOfPeriods)];
     } else {
-       //return ""
+       //return "string length is invalid";
     }
 };
 
