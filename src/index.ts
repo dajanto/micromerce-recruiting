@@ -19,12 +19,18 @@ function strichdivide(strichstring) {
 const extractDates = (customer: any): Dates[] | [] => {
     if (
         customer.ListOfPeriods == null ||
-        Object.hasOwn(customer, "ListOfPeriods")
+        !Object.hasOwn(customer, "ListOfPeriods")
     ) {
         return [];
     }
 
-    return dashdivide(customer.ListOfPeriods);
+    if(customer.ListOfPeriods.includes("|")) {
+        return strichdivide(customer.ListOfPeriods);
+    } else if(customer.ListOfPeriods.includes("-")) {
+       return dashdivide(customer.ListOfPeriods);
+    } else {
+       //return ""
+    }
 };
 
 export default extractDates;
