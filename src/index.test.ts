@@ -17,7 +17,7 @@ describe("extractDates", () => {
   test("should return empty list", () => {
     // given
     const customer = {
-      ListOfPeriods: "NUlL"
+      ListOfPeriods: null
     };
     // when
     const result = extractDates(customer);
@@ -85,7 +85,7 @@ describe("extractDates", () => {
     // given
     const customer = {
       ListOfPeriods:
-        "12.06.2008- 11.07.2008|12.08.2008 - 11.11.2008|10.11.2011- 09.12.2011|01.08.2015 - 01.01.2016"
+          "12.06.2008- 11.07.2008|12.08.2008 - 11.11.2008|10.11.2011- 09.12.2011|01.08.2015 - 01.01.2016"
     };
     // when
     const result = extractDates(customer);
@@ -132,6 +132,6 @@ describe("extractDates", () => {
     // when
     const result = extractDates(customer);
     // then
-    expect(result[0]).toStrictEqual("string length is invalid");
+    expect(result).toStrictEqual("string length is invalid");
   });
 });
