@@ -3,19 +3,35 @@ type Dates = {
   endDate: string;
 };
 
-const extractDates = (customer: any): Dates | [] => {
+function dashdivide(dashstring): Dates {
+  let delimiterdash = dashstring.trim().split("-");
+  let startDate = delimiterdash[0];
+  let endDate = delimiterdash[1];
+  return { startDate, endDate };
+}
 
-  if (customer.ListOfPeriods == null || Object.hasOwn(customer, 'ListOfPeriods')) {
+const extractDates = (customer: any): Dates | [] => {
+  if (
+      customer.ListOfPeriods == null ||
+      Object.hasOwn(customer, "ListOfPeriods")
+  ) {
     return [];
   }
 
-  const startDate = "11.11.2008";
-  const endDate = "17.12.2008";
+  let trimmed = customer.ListOfPeriods.trim();
+  let delimiterstrich = trimmed.split("|");
+  if (delimiterstrich != "") {
+    let startDate = delimiter[0];
+    let endDate = delimiter[1];
+  } else {
+  }
 
-  return {
-    startDate,
-    endDate
-  };
+  let delimiterdash = trimmed.split("-");
+
+  let startDate = delimiter[0];
+  let endDate = delimiter[1];
+
+  return [{ startDate, endDate }];
 };
 
 export default extractDates;
